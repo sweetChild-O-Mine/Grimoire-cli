@@ -9,6 +9,9 @@ import clipboardy from 'clipboardy';
 
 const program = new Command()
 
+const SERVER_URL = 'https://grimoire-core.onrender.com'
+
+
 program
     .command('add')
     .description('Save a code snippet to the cloud!!!')
@@ -36,7 +39,7 @@ program
                 code: answer.code
             }
 
-            const res = await axios.post('http://127.0.0.1:3000/add', payload)
+            const res = await axios.post(`${SERVER_URL}/add`, payload)
 
             console.log("Server replied", res.data);
         } catch (error) {
@@ -55,7 +58,7 @@ program
 
         try {
             // get request maro and get the data from the server 
-            const response = await axios.get('http://127.0.0.1:3000/read')
+            const response = await axios.get(`${SERVER_URL}/read`)
 
             // get the data out of the response
             const allSnippets = response.data   //its json object basically
@@ -80,7 +83,7 @@ program
         console.log(`\n🔍 Searching for "${search_term}...`);
         try {
             // /read endpoint for GET reqest maro
-            const response = await axios.get("http://127.0.0.1:3000/read")
+            const response = await axios.get(`${SERVER_URL}/read`)
 
             // get the data arra from this response 
             const allSnippetsArr = response.data
